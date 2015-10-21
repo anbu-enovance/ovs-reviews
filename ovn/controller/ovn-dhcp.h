@@ -13,25 +13,12 @@
  * limitations under the License.
  */
 
-#ifndef OFCONTROLLER_H
-#define OFCONTROLLER_H 1
+#ifndef OVN_DHCP_H
+#define OVN_DHCP_H
 
-#include <stdint.h>
+bool ovn_dhcp_process_packet(struct controller_ctx *ctx,
+                             struct ofputil_packet_in *packet,
+                             enum ofputil_protocol ofp_proto,
+                             struct ofpbuf **ret_buf);
 
-/* Interface for OVN main loop. */
-void ofcontroller_init(char const*);
-void ofcontroller_run(struct controller_ctx *ctx,
-                      const struct ovsrec_bridge *br_int);
-void ofcontroller_wait(void);
-void ofcontroller_destroy(void);
-
-/*
-* Add flows to forward the packets to the controller.
-*/
-void ofcontroller_add_flows(const struct sbrec_port_binding *binding,
-                            struct hmap *flow_table);
-/*
- * Get the Openflow protocol supported by the client
- */
-enum ofputil_protocol ofcontroller_ofp_proto(void);
 #endif

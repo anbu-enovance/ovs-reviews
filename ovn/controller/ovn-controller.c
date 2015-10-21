@@ -239,8 +239,6 @@ main(int argc, char *argv[])
     parse_options(argc, argv);
     fatal_ignore_sigpipe();
 
-    daemon_save_fd(1);
-    daemon_save_fd(2);
     daemonize_start(false);
 
     retval = unixctl_server_create(NULL, &unixctl);
